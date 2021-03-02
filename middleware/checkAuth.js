@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { secrets } = require('../config/secrets');
 const User = require('../models/User');
 
 exports.auth = async (req, res, next) => {
@@ -12,7 +13,7 @@ exports.auth = async (req, res, next) => {
     return res.status(401).json({ message: 'No token ,authorization denied' });
   }
 
-  const decoded = jwt.verify(token, 'municipal');
+  const decoded = jwt.verify(token, secrets.auth.signKey);
   const user = await User.findById(decoded.user.id);
   if (!user) {
     return res.status(401).json({ message: 'Unidentified User Request' });

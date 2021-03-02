@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
+const { secrets } = require('../config/secrets');
 
 exports.SignIn = async(req,res) => {
   try {
@@ -30,7 +31,7 @@ exports.SignIn = async(req,res) => {
       }
     }
 
-    jwt.sign(payload, 'municipal', {
+    jwt.sign(payload, secrets.auth.signKey, {
       expiresIn: '1y'
     }, (err, token) => {
       if (err) throw err;

@@ -11,4 +11,7 @@ exports.secrets = {
     id:process.env.EMAIL_ID,
     password:process.env.EMAIL_PASSWORD
   },
+  auth: {
+    signKey: process.env.SIGN_KEY
+  }
 }
